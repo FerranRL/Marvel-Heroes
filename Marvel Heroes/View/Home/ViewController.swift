@@ -34,6 +34,8 @@ class ViewController: UIViewController {
         imageView.image = UIImage(named: "bg_home_header")
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+
         return imageView
     }()
     
@@ -92,9 +94,10 @@ class ViewController: UIViewController {
         headerView.leadingAnchor.constraint(equalTo: header.leadingAnchor).isActive = true
         headerView.trailingAnchor.constraint(equalTo: header.trailingAnchor).isActive = true
         
+        
         header.addSubview(homeImageView)
         homeImageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
-        homeImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+        homeImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: -20).isActive = true
         
         header.clipsToBounds = true
         contentView.addArrangedSubview(header)
@@ -116,7 +119,9 @@ class ViewController: UIViewController {
         tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
+        
         contentView.addArrangedSubview(list)
+        list.topAnchor.constraint(equalTo: header.bottomAnchor).isActive = true
         
         
     }

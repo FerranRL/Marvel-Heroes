@@ -67,7 +67,7 @@ class DetailViewController: UIViewController {
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .light)
         label.textColor = .white
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
