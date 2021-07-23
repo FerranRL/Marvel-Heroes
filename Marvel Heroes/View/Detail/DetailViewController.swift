@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 500).isActive = true
         return view
     }()
     let body = UIView()
@@ -59,6 +60,16 @@ class DetailViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textColor = .white
         label.numberOfLines = 1
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.textColor = .white
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -66,13 +77,14 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupdata()
+        setupData()
         setupScrollView()
         setupContentView()
         setupHeader()
+        setupBody()
     }
     
-    private func setupdata() {
+    private func setupData() {
         if let url = URL(string: (hero?.thumbnail.url)!) {
             heroImageView.kf.setImage(with: url)
         } else {
@@ -80,6 +92,9 @@ class DetailViewController: UIViewController {
         }
         
         heroLabel.text = hero.name
+    
+        descriptionLabel.text = (hero.description != "") ? hero.description : "No hay descripción de este Héroe de Marvel"
+    
     }
     
     private func setupScrollView() {
@@ -128,13 +143,32 @@ class DetailViewController: UIViewController {
         
         header.addSubview(heroLabel)
         heroLabel.centerXAnchor.constraint(equalTo: heroImageView.centerXAnchor).isActive = true
-        heroLabel.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: 25).isActive = true
+        heroLabel.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: 40).isActive = true
+        heroLabel.leadingAnchor.constraint(equalTo: headerImageView.leadingAnchor, constant: 12).isActive = true
+        heroLabel.trailingAnchor.constraint(equalTo: headerImageView.trailingAnchor, constant: -12).isActive = true
         heroLabel.adjustsFontSizeToFitWidth = true
         heroLabel.minimumScaleFactor = 0.5
         
         
         contentView.addArrangedSubview(header)
         header.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        
+        
+    }
+    
+    private func setupBody() {
+        
+        body.addSubview(descriptionLabel)
+        descriptionLabel.topAnchor.constraint(equalTo: body.topAnchor, constant: 18).isActive = true
+        descriptionLabel.bottomAnchor.constraint(equalTo: body.bottomAnchor, constant: -30).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: body.leadingAnchor, constant: 12).isActive = true
+        descriptionLabel.trailingAnchor.constraint(equalTo: body.trailingAnchor, constant: -12).isActive = true
+        
+        
+        contentView.addArrangedSubview(body)
+        body.topAnchor.constraint(equalTo: header.bottomAnchor).isActive = true
+        body.leadingAnchor.constraint(equalTo: headerImageView.leadingAnchor).isActive = true
+        body.trailingAnchor.constraint(equalTo: headerImageView.trailingAnchor).isActive = true
         
         
     }
