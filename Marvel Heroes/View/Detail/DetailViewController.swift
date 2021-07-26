@@ -142,6 +142,8 @@ class DetailViewController: UIViewController {
         header.addSubview(logoImageView)
         logoImageView.topAnchor.constraint(equalTo: header.topAnchor, constant: 20).isActive = true
         logoImageView.trailingAnchor.constraint(equalTo: headerImageView.trailingAnchor, constant: -20).isActive = true
+        logoImageView.layer.cornerRadius = 10
+        logoImageView.clipsToBounds = true
         
         header.addSubview(heroImageView)
         heroImageView.centerXAnchor.constraint(equalTo: headerImageView.centerXAnchor).isActive = true

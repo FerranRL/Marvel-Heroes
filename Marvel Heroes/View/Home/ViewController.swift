@@ -101,6 +101,8 @@ class ViewController: UIViewController {
         header.addSubview(homeImageView)
         homeImageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
         homeImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: -60).isActive = true
+        homeImageView.layer.cornerRadius = 10
+        homeImageView.clipsToBounds = true
         
         header.clipsToBounds = true
         contentView.addArrangedSubview(header)
@@ -134,10 +136,20 @@ class ViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
         blurredEffectView.frame = view.bounds
+        let loadingView = LoaderView(frame: CGRect(x: 0, y: self.view.bounds.height - 80, width: self.view.bounds.width, height: 80))
+        loadingView.backgroundColor = UIColor(named: "MarvelRed")
         
-        if firstLoad {view.addSubview(blurredEffectView)}
+        if firstLoad {
+            view.addSubview(blurredEffectView)
+            lottieAnimation()
+        } else {
+            UIView.transition(with: self.view, duration: 0.25, options: .transitionCrossDissolve, animations: {
+                self.view.addSubview(loadingView)
+            }, completion: nil)
+            
+        }
         
-        lottieAnimation()
+        
         MarvelAPi.loadHeroes(name: self.name, page: self.currentPage) { (info) in
             if let info = info {
                 self.heroes += info.data.results
@@ -145,10 +157,17 @@ class ViewController: UIViewController {
                 print(self.total)
                 print(self.heroes.count)
                 DispatchQueue.main.async {
+                    
                     self.loadingHeroes = false
-                    self.animationView.removeFromSuperview()
-                    blurredEffectView.removeFromSuperview()
+                    UIView.transition(with: self.view, duration: 0.25, options: .transitionCrossDissolve, animations: {
+                        self.animationView.removeFromSuperview()
+                        blurredEffectView.removeFromSuperview()
+                    }, completion: nil)
                     self.tableView.reloadData()
+                    UIView.transition(with: self.view, duration: 0.25, options: .transitionCrossDissolve, animations: {
+                        loadingView.removeFromSuperview()
+                    }, completion: nil)
+                    
                 }
             }
         }
@@ -160,9 +179,7 @@ class ViewController: UIViewController {
         animationView.frame = CGRect(x: 0, y: 0, width: 125, height: 125)
         animationView.center = self.view.center
         animationView.contentMode = .scaleAspectFit
-        
-        if firstLoad {view.addSubview(animationView)}
-        
+        view.addSubview(animationView)
         animationView.play()
         animationView.loopMode = .loop
     }
@@ -226,13 +243,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == heroes.count - 1 && !loadingHeroes && heroes.count != total {
             currentPage += 1
             firstLoad = false
-            
-            let spinner = UIActivityIndicatorView(style: .medium)
-            spinner.startAnimating()
-            spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
-            
-            self.tableView.tableFooterView = spinner
-            self.tableView.tableFooterView?.isHidden = false
             
             loadHeroes()
         }

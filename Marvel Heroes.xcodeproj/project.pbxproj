@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000AB7AB26AECCCD00122ED4 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AB7AA26AECCCD00122ED4 /* LoaderView.swift */; };
 		0014899526A962DA00DDA0D4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0014899426A962DA00DDA0D4 /* Alamofire */; };
 		0014899726A9640500DDA0D4 /* MarvelClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0014899626A9640500DDA0D4 /* MarvelClasses.swift */; };
 		0014899A26A96E5B00DDA0D4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0014899926A96E5B00DDA0D4 /* Kingfisher */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		000AB7AA26AECCCD00122ED4 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		0014899626A9640500DDA0D4 /* MarvelClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelClasses.swift; sourceTree = "<group>"; };
 		0040F89F26A6DFEC00E739B2 /* Marvel Heroes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Heroes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0040F8A226A6DFEC00E739B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000AB7AC26AECF1900122ED4 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				000AB7AA26AECCCD00122ED4 /* LoaderView.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
 		0040F89626A6DFEC00E739B2 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +123,7 @@
 		0040F8B726A6E01C00E739B2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				000AB7AC26AECF1900122ED4 /* Loading */,
 				00D97D4626A97AA5008A704A /* Detail */,
 				0040F8B926A6E03B00E739B2 /* Home */,
 			);
@@ -326,6 +337,7 @@
 				0040F8D226A843FD00E739B2 /* CharacterTableViewCell.swift in Sources */,
 				0040F8C126A6FF8200E739B2 /* Image.swift in Sources */,
 				0040F8A326A6DFEC00E739B2 /* AppDelegate.swift in Sources */,
+				000AB7AB26AECCCD00122ED4 /* LoaderView.swift in Sources */,
 				007E621C26A9607B001631FA /* MarvelAPI.swift in Sources */,
 				0014899726A9640500DDA0D4 /* MarvelClasses.swift in Sources */,
 				0040F8BF26A6FDF800E739B2 /* Character.swift in Sources */,
