@@ -1,16 +1,20 @@
 PODS:
+  - lottie-ios (3.2.3)
   - SwiftHash (2.0.2)
 
 DEPENDENCIES:
+  - lottie-ios
   - SwiftHash
 
 SPEC REPOS:
   trunk:
+    - lottie-ios
     - SwiftHash
 
 SPEC CHECKSUMS:
+  lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   SwiftHash: 6d312abe61c8359bdef8d0093642f3a70b1c17ba
 
-PODFILE CHECKSUM: 9a88eb3d87cc7184d19f863cbc2dbd05f204cd12
+PODFILE CHECKSUM: e12145a457323182b931ab65c03583a7b8231f5b
 
 COCOAPODS: 1.10.1

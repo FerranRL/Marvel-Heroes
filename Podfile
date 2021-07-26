@@ -7,6 +7,7 @@ target 'Marvel Heroes' do
 
   # Pods for Marvel Heroes
   pod 'SwiftHash'
+  pod 'lottie-ios'
 
 
 end

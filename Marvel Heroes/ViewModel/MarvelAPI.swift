@@ -11,6 +11,7 @@ import Alamofire
 
 class MarvelAPi {
     
+    ///Load all Heroes
     class func loadHeroes(name: String?, page: Int = 0, onComplete: @escaping (MarvelInfo?) -> Void) {
         let offset = page * Constants.limit
         let startsWith: String
@@ -20,7 +21,24 @@ class MarvelAPi {
             startsWith = ""
         }
         
-        let url = Constants.basePath + "offset=\(offset)&limit=\(Constants.limit)&" + startsWith + getCredentials()
+        let url = Constants.basePath + "?offset=\(offset)&limit=\(Constants.limit)&" + startsWith + getCredentials()
+        print(url)
+        AF.request(url).responseJSON { (response) in
+            guard let data = response.data,
+                  let marvelInfo = try? JSONDecoder().decode(MarvelInfo.self, from: data),
+                  marvelInfo.code == 200 else {
+                onComplete(nil)
+                return
+            }
+            onComplete(marvelInfo)
+        }
+    }
+    
+    ///Load character by Id
+    class func loadHero(id: Int, onComplete: @escaping (MarvelInfo?) -> Void ) {
+        
+        
+        let url = Constants.basePath + "/\(id)?" + getCredentials()
         print(url)
         AF.request(url).responseJSON { (response) in
             guard let data = response.data,

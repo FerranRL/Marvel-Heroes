@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 class ViewController: UIViewController {
     
@@ -25,9 +26,10 @@ class ViewController: UIViewController {
     var loadingHeroes: Bool = false
     var currentPage: Int  = 0
     var total = 0
+    let animationView = AnimationView(name: "loader")
+    var firstLoad = true
     
     
-    let fakedata = ["Spider-Man", "Batman", "Iron Man"]
     
     let headerView: UIImageView = {
         let imageView = UIImageView()
@@ -59,7 +61,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         setupContentView()
         setupHeader()
         setupTableView()
@@ -128,7 +130,14 @@ class ViewController: UIViewController {
     
     func loadHeroes() {
         loadingHeroes = true
-        MarvelAPi.loadHeroes(name: name, page: currentPage) { (info) in
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = view.bounds
+        
+        if firstLoad {view.addSubview(blurredEffectView)}
+        
+        lottieAnimation()
+        MarvelAPi.loadHeroes(name: self.name, page: self.currentPage) { (info) in
             if let info = info {
                 self.heroes += info.data.results
                 self.total = info.data.total
@@ -136,10 +145,25 @@ class ViewController: UIViewController {
                 print(self.heroes.count)
                 DispatchQueue.main.async {
                     self.loadingHeroes = false
+                    self.animationView.removeFromSuperview()
+                    blurredEffectView.removeFromSuperview()
                     self.tableView.reloadData()
                 }
             }
         }
+        
+    }
+    
+    func lottieAnimation() {
+        
+        animationView.frame = CGRect(x: 0, y: 0, width: 125, height: 125)
+        animationView.center = self.view.center
+        animationView.contentMode = .scaleAspectFit
+        
+        if firstLoad {view.addSubview(animationView)}
+        
+        animationView.play()
+        animationView.loopMode = .loop
     }
     
 }
@@ -168,26 +192,47 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CharacterTableViewCell
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.clear
         let hero = heroes[indexPath.row]
         cell.prepareHero(with: hero)
+        print("\(hero.id)")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Tap en la celda de \(heroes[indexPath.row].name)")
         
-        let storyboard: UIStoryboard = UIStoryboard(name: "DetailStoryBoard", bundle: nil)
-        let detailController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController
-        detailController.hero = heroes[indexPath.row]
-        self.present(detailController, animated: true, completion: nil)
+        var hero:[Hero] = []
+        let heroId = heroes[indexPath.row].id
+        
+        MarvelAPi.loadHero(id: heroId) { info in
+            hero = info!.data.results
+            let storyboard: UIStoryboard = UIStoryboard(name: "DetailStoryBoard", bundle: nil)
+            let detailController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController
+            detailController.hero = hero[0]
+            self.present(detailController, animated: true, completion: nil)
+        }
+        
+
+        
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == heroes.count - 10 && !loadingHeroes && heroes.count != total {
+        if indexPath.row == heroes.count - 1 && !loadingHeroes && heroes.count != total {
             currentPage += 1
+            firstLoad = false
+            
+            let spinner = UIActivityIndicatorView(style: .medium)
+            spinner.startAnimating()
+            spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+            
+            self.tableView.tableFooterView = spinner
+            self.tableView.tableFooterView?.isHidden = false
+            
             loadHeroes()
         }
     }
