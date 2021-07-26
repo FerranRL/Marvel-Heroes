@@ -22,7 +22,6 @@ class MarvelAPi {
         }
         
         let url = Constants.basePath + "?offset=\(offset)&limit=\(Constants.limit)&" + startsWith + getCredentials()
-        print(url)
         AF.request(url).responseJSON { (response) in
             guard let data = response.data,
                   let marvelInfo = try? JSONDecoder().decode(MarvelInfo.self, from: data),
@@ -39,7 +38,6 @@ class MarvelAPi {
         
         
         let url = Constants.basePath + "/\(id)?" + getCredentials()
-        print(url)
         AF.request(url).responseJSON { (response) in
             guard let data = response.data,
                   let marvelInfo = try? JSONDecoder().decode(MarvelInfo.self, from: data),

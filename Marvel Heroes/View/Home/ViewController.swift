@@ -154,8 +154,6 @@ class ViewController: UIViewController {
             if let info = info {
                 self.heroes += info.data.results
                 self.total = info.data.total
-                print(self.total)
-                print(self.heroes.count)
                 DispatchQueue.main.async {
                     
                     self.loadingHeroes = false
@@ -216,12 +214,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = UIColor.clear
         let hero = heroes[indexPath.row]
         cell.prepareHero(with: hero)
-        print("\(hero.id)")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Tap en la celda de \(heroes[indexPath.row].name)")
         
         var hero:[Hero] = []
         let heroId = heroes[indexPath.row].id
@@ -233,10 +229,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             detailController.hero = hero[0]
             self.present(detailController, animated: true, completion: nil)
         }
-        
-
-        
-        
+ 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

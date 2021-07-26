@@ -34,6 +34,16 @@ class DetailViewController: UIViewController {
         return imageView
     }()
     
+    let backButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.addTarget(self, action: #selector(closeDetail), for: .touchUpInside)
+        let image = UIImage(named: "cancel")
+        button.setImage(image, for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo_heroes")
@@ -139,11 +149,17 @@ class DetailViewController: UIViewController {
         headerImageView.clipsToBounds = true
         headerImageView.contentMode = .scaleToFill
         
+        
+        
         header.addSubview(logoImageView)
         logoImageView.topAnchor.constraint(equalTo: header.topAnchor, constant: 20).isActive = true
         logoImageView.trailingAnchor.constraint(equalTo: headerImageView.trailingAnchor, constant: -20).isActive = true
         logoImageView.layer.cornerRadius = 10
         logoImageView.clipsToBounds = true
+        
+        header.addSubview(backButton)
+        backButton.centerYAnchor.constraint(equalTo: logoImageView.centerYAnchor).isActive = true
+        backButton.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 20).isActive = true
         
         header.addSubview(heroImageView)
         heroImageView.centerXAnchor.constraint(equalTo: headerImageView.centerXAnchor).isActive = true
@@ -179,6 +195,10 @@ class DetailViewController: UIViewController {
         body.trailingAnchor.constraint(equalTo: headerImageView.trailingAnchor).isActive = true
         
         
+    }
+    
+    @objc func closeDetail() {
+        self.dismiss(animated: true, completion: nil)
     }
 
 
