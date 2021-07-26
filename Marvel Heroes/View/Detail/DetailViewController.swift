@@ -36,9 +36,13 @@ class DetailViewController: UIViewController {
     
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo_peque")
-        imageView.contentMode = .scaleToFill
+        imageView.image = UIImage(named: "logo_heroes")
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 77).isActive = true
+        
         return imageView
     }()
     
@@ -95,7 +99,7 @@ class DetailViewController: UIViewController {
         
         heroLabel.text = hero.name
     
-        descriptionLabel.text = (hero.description != "") ? hero.description : "No hay descripción de este Héroe de Marvel"
+        descriptionLabel.text = (hero.description != "") ? hero.description : "No hay descripción de este personaje de Marvel"
     
     }
     

@@ -43,9 +43,11 @@ class ViewController: UIViewController {
     
     let homeImageView: UIImageView = {
         let imageview = UIImageView()
-        imageview.image = UIImage(named: "logo_marvel_header")
+        imageview.image = UIImage(named: "logo_heroes")
         imageview.contentMode = .scaleToFill
         imageview.translatesAutoresizingMaskIntoConstraints = false
+        imageview.heightAnchor.constraint(equalToConstant: 162).isActive = true
+        imageview.widthAnchor.constraint(equalToConstant: 270).isActive = true
         return imageview
     }()
     
@@ -81,7 +83,6 @@ class ViewController: UIViewController {
         
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        
         contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         contentView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -99,7 +100,7 @@ class ViewController: UIViewController {
         
         header.addSubview(homeImageView)
         homeImageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
-        homeImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: -20).isActive = true
+        homeImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: -60).isActive = true
         
         header.clipsToBounds = true
         contentView.addArrangedSubview(header)
