@@ -60,16 +60,53 @@ class ViewController: UIViewController {
         return gradientLayer
     }()
     
+    var searchHeroes: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchTextField.backgroundColor = .lightGray.withAlphaComponent(0.6)
+        searchBar.searchTextField.leftView?.tintColor = .white
+        searchBar.searchTextField.textColor = .white
+        searchBar.tintColor = .white
+        //searchBar.placeholder = "Buscar personaje..."
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString.init(string: "Bucar personaje...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ///For dismiss keyboard on Tap outside SearchBar
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
     
         setupContentView()
         setupHeader()
+        clearBackgroundColorSB()
         setupTableView()
         loadHeroes()
         
     }
+    
+    ///Functions for SearchBar
+    
+    private func clearBackgroundColorSB() {
+        guard let UISearchBarBackground: AnyClass = NSClassFromString("UISearchBarBackground") else {return}
+        
+        for view in searchHeroes.subviews {
+            for subview in view.subviews where subview.isKind(of: UISearchBarBackground) {
+                subview.alpha = 0
+            }
+        }
+    }
+    
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        searchHeroes.searchTextField.endEditing(true)
+    }
+    
+    ///Setup Views
     
     private func setupContentView() {
         
@@ -99,10 +136,15 @@ class ViewController: UIViewController {
         
         
         header.addSubview(homeImageView)
-        homeImageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
-        homeImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: -60).isActive = true
+        homeImageView.centerXAnchor.constraint(equalTo: header.centerXAnchor).isActive = true
+        homeImageView.centerYAnchor.constraint(equalTo: header.centerYAnchor, constant: -14).isActive = true
         homeImageView.layer.cornerRadius = 10
         homeImageView.clipsToBounds = true
+        
+        header.addSubview(searchHeroes)
+        searchHeroes.bottomAnchor.constraint(equalTo: header.bottomAnchor, constant: -8).isActive = true
+        searchHeroes.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 16).isActive = true
+        searchHeroes.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -16).isActive = true
         
         header.clipsToBounds = true
         contentView.addArrangedSubview(header)
@@ -124,12 +166,15 @@ class ViewController: UIViewController {
         tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
+        searchHeroes.delegate = self
         
         contentView.addArrangedSubview(list)
         list.topAnchor.constraint(equalTo: header.bottomAnchor).isActive = true
         
         
     }
+    
+    //Load Data
     
     func loadHeroes() {
         loadingHeroes = true
@@ -172,6 +217,8 @@ class ViewController: UIViewController {
         
     }
     
+    ///Load Animation
+    
     func lottieAnimation() {
         
         animationView.frame = CGRect(x: 0, y: 0, width: 125, height: 125)
@@ -184,63 +231,18 @@ class ViewController: UIViewController {
     
 }
 
-extension UIView {
-    func applyGradient(frame: CGRect) {
-        let gradient = CAGradientLayer()
-        gradient.frame = frame
-        gradient.type = .radial
-        gradient.startPoint = CGPoint(x: 0.5, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1, y: 1)
-        let color1 = UIColor(named: "Blue1")
-        let color2 = UIColor(named: "Blue2")
-        gradient.colors = [color1?.cgColor as Any, color2?.cgColor as Any]
-        self.layer.insertSublayer(gradient, at: 0)
-    }
-}
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.heroes.count
-    }
+
+
+
+extension ViewController: UISearchBarDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CharacterTableViewCell
-        cell.selectionStyle = .none
-        cell.backgroundColor = UIColor.clear
-        let hero = heroes[indexPath.row]
-        cell.prepareHero(with: hero)
-        return cell
+        searchBar.resignFirstResponder()
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        var hero:[Hero] = []
-        let heroId = heroes[indexPath.row].id
-        
-        MarvelAPi.loadHero(id: heroId) { info in
-            hero = info!.data.results
-            let storyboard: UIStoryboard = UIStoryboard(name: "DetailStoryBoard", bundle: nil)
-            let detailController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController
-            detailController.hero = hero[0]
-            self.present(detailController, animated: true, completion: nil)
-        }
- 
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == heroes.count - 1 && !loadingHeroes && heroes.count != total {
-            currentPage += 1
-            firstLoad = false
-            
-            loadHeroes()
-        }
-    }
-    
+  
 }
 
 

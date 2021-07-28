@@ -8,6 +8,12 @@ target 'Marvel Heroes' do
   # Pods for Marvel Heroes
   pod 'SwiftHash'
   pod 'lottie-ios'
+  
+  target 'Marvel HeroesTests' do
+  
+    pod 'SwiftHash'
+    pod 'MockingbirdFramework', '~> 0.17'
+  end
 
 
 end
