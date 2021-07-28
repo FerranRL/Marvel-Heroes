@@ -15,7 +15,6 @@ import SwiftHash
 class MarvelApiTest: XCTestCase {
     
     var sut: MarvelAPi?
-
     
     override func setUp() {
         sut = MarvelAPi()
