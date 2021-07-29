@@ -68,7 +68,7 @@ class MarvelApiTest: XCTestCase {
 
         })
         
-        wait(for: [expectation], timeout: 10.0)
+        wait(for: [expectation], timeout: 5.0)
     
     }
     
