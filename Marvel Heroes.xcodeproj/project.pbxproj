@@ -16,6 +16,7 @@
 		0020727A26B0063800D25EA5 /* Marvel_HeroesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020727926B0063800D25EA5 /* Marvel_HeroesUITests.swift */; };
 		0020728826B0065500D25EA5 /* Marvel_HeroesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020728726B0065500D25EA5 /* Marvel_HeroesTests.swift */; };
 		0020729326B0132E00D25EA5 /* MarvelApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020729226B0132E00D25EA5 /* MarvelApiTest.swift */; };
+		0020729526B2776C00D25EA5 /* HomeViewController + UISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020729426B2776C00D25EA5 /* HomeViewController + UISearchBar.swift */; };
 		0040F8A326A6DFEC00E739B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F8A226A6DFEC00E739B2 /* AppDelegate.swift */; };
 		0040F8A526A6DFEC00E739B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F8A426A6DFEC00E739B2 /* SceneDelegate.swift */; };
 		0040F8A726A6DFEC00E739B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F8A626A6DFEC00E739B2 /* ViewController.swift */; };
@@ -65,6 +66,7 @@
 		0020728726B0065500D25EA5 /* Marvel_HeroesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marvel_HeroesTests.swift; sourceTree = "<group>"; };
 		0020728926B0065500D25EA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0020729226B0132E00D25EA5 /* MarvelApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiTest.swift; sourceTree = "<group>"; };
+		0020729426B2776C00D25EA5 /* HomeViewController + UISearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController + UISearchBar.swift"; sourceTree = "<group>"; };
 		0040F89F26A6DFEC00E739B2 /* Marvel Heroes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Heroes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0040F8A226A6DFEC00E739B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0040F8A426A6DFEC00E739B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		00D97D4726A97AD3008A704A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		00D97D4926A97AEC008A704A /* DetailStoryBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailStoryBoard.storyboard; sourceTree = "<group>"; };
 		02335FAED42D644B5BA1A28E /* Pods-Marvel Heroes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marvel Heroes.release.xcconfig"; path = "Target Support Files/Pods-Marvel Heroes/Pods-Marvel Heroes.release.xcconfig"; sourceTree = "<group>"; };
-		217231E77AD2AAD97B63F96C /* Marvel_HeroesTests-Marvel_HeroesMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = "Marvel_HeroesTests-Marvel_HeroesMocks.generated.swift"; path = "MockingbirdMocks/Marvel_HeroesTests-Marvel_HeroesMocks.generated.swift"; sourceTree = "<group>"; };
+		217231E77AD2AAD97B63F96C /* Marvel_HeroesTests-Marvel_HeroesMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Marvel_HeroesTests-Marvel_HeroesMocks.generated.swift"; path = "MockingbirdMocks/Marvel_HeroesTests-Marvel_HeroesMocks.generated.swift"; sourceTree = "<group>"; };
 		59E919F5F1E09AABD46A295F /* Pods-Marvel Heroes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marvel Heroes.debug.xcconfig"; path = "Target Support Files/Pods-Marvel Heroes/Pods-Marvel Heroes.debug.xcconfig"; sourceTree = "<group>"; };
 		631787C5E451A039EA70CF90 /* Pods-Marvel Heroes-Marvel HeroesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marvel Heroes-Marvel HeroesTests.debug.xcconfig"; path = "Target Support Files/Pods-Marvel Heroes-Marvel HeroesTests/Pods-Marvel Heroes-Marvel HeroesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9DCA8FEA49E2B59BBB3C1EDD /* Pods-Marvel Heroes-Marvel HeroesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marvel Heroes-Marvel HeroesTests.release.xcconfig"; path = "Target Support Files/Pods-Marvel Heroes-Marvel HeroesTests/Pods-Marvel Heroes-Marvel HeroesTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -199,7 +201,6 @@
 				0040F8A226A6DFEC00E739B2 /* AppDelegate.swift */,
 				0040F8A426A6DFEC00E739B2 /* SceneDelegate.swift */,
 				0040F8AB26A6DFF600E739B2 /* Assets.xcassets */,
-				0040F8AD26A6DFF600E739B2 /* LaunchScreen.storyboard */,
 				0040F8B026A6DFF600E739B2 /* Info.plist */,
 			);
 			path = "Marvel Heroes";
@@ -237,6 +238,7 @@
 			children = (
 				0040F8A626A6DFEC00E739B2 /* ViewController.swift */,
 				0020726E26B0045C00D25EA5 /* HomeViewController + TableView.swift */,
+				0020729426B2776C00D25EA5 /* HomeViewController + UISearchBar.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -271,6 +273,7 @@
 		0040F8CA26A80CBE00E739B2 /* StoryBoards */ = {
 			isa = PBXGroup;
 			children = (
+				0040F8AD26A6DFF600E739B2 /* LaunchScreen.storyboard */,
 				0040F8A826A6DFEC00E739B2 /* Main.storyboard */,
 				00D97D4926A97AEC008A704A /* DetailStoryBoard.storyboard */,
 			);
@@ -597,6 +600,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0020729526B2776C00D25EA5 /* HomeViewController + UISearchBar.swift in Sources */,
 				00D97D4826A97AD3008A704A /* DetailViewController.swift in Sources */,
 				0040F8A726A6DFEC00E739B2 /* ViewController.swift in Sources */,
 				0020726F26B0045C00D25EA5 /* HomeViewController + TableView.swift in Sources */,
