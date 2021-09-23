@@ -82,6 +82,7 @@ class ViewController: UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
+        
         setupContentView()
         setupHeader()
         clearBackgroundColorSB()
