@@ -31,7 +31,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         var hero:[Hero] = []
         let heroId = heroes[indexPath.row].id
         
-        MarvelAPi.loadHero(id: heroId) { info in
+        MarvelViewModel.loadHero(id: heroId) { info in
             hero = info!.data.results
             let storyboard: UIStoryboard = UIStoryboard(name: "DetailStoryBoard", bundle: nil)
             let detailController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController

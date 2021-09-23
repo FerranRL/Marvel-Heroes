@@ -9,7 +9,7 @@ import Foundation
 import SwiftHash
 import Alamofire
 
-class MarvelAPi {
+class MarvelViewModel {
     
     ///Load all Heroes
     class func loadHeroes(name: String?, page: Int = 0, onComplete: @escaping (MarvelInfo?) -> Void) {
@@ -51,8 +51,8 @@ class MarvelAPi {
     
     private class func getCredentials() -> String {
         let ts = String(Date().timeIntervalSince1970)
-        let hash = MD5(ts+Constants.privateKey+Constants.publicKey).lowercased()
-        return "&ts=\(ts)&apikey=\(Constants.publicKey)&hash=\(hash)"
+        let hash = MD5(ts+Constants.privateKey!+Constants.publicKey!).lowercased()
+        return "&ts=\(ts)&apikey=\(String(describing: Constants.publicKey))&hash=\(hash)"
     }
     
 }

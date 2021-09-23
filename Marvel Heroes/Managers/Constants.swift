@@ -10,8 +10,8 @@ import Foundation
 struct Constants {
     
     static let basePath = "https://gateway.marvel.com/v1/public/characters"
-    static let privateKey = "8a219b98a93d5b670b19067ddf5e9b6f16bbaebd"
-    static let publicKey = "23e6ade1932e49e3748db262d9738e02"
+    static let privateKey = ProcessInfo.processInfo.environment["MARVEL_PRIVATE_KEY"]
+    static let publicKey = ProcessInfo.processInfo.environment["MARVEL_PUBLIC_KEY"]
     static let limit = 50
     static let application = "application/json"
     static let data = "data"

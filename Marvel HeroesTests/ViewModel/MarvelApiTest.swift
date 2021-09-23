@@ -14,10 +14,10 @@ import SwiftHash
 
 class MarvelApiTest: XCTestCase {
     
-    var sut: MarvelAPi?
+    var sut: MarvelViewModel?
     
     override func setUp() {
-        sut = MarvelAPi()
+        sut = MarvelViewModel()
     }
     
      override func tearDown() {
@@ -27,7 +27,7 @@ class MarvelApiTest: XCTestCase {
     func testLoadHeros() {
         let expectation = XCTestExpectation(description: "Comprobar que se obtiene datos de la API de Marvel")
         
-        MarvelAPi.loadHeroes(name: "", onComplete: { info in
+        MarvelViewModel.loadHeroes(name: "", onComplete: { info in
             XCTAssertNotNil(info, "No se han obtenido datos")
             expectation.fulfill()
         })
@@ -42,7 +42,7 @@ class MarvelApiTest: XCTestCase {
         let idHero = 1011334
         
         
-        MarvelAPi.loadHero(id: idHero, onComplete: { info in
+        MarvelViewModel.loadHero(id: idHero, onComplete: { info in
             
             XCTAssertNotNil(info, "No se han obtenido datos")
             expectation.fulfill()
@@ -60,7 +60,7 @@ class MarvelApiTest: XCTestCase {
         let idHero = 1011334
         
         
-        MarvelAPi.loadHero(id: idHero, onComplete: { info in
+        MarvelViewModel.loadHero(id: idHero, onComplete: { info in
             
             let hero = info!.data.results[0]
             XCTAssertEqual(idHero, hero.id, "Los ids no coinciden")

@@ -16,7 +16,7 @@ extension ViewController: UISearchBarDelegate {
         self.allHeroes = self.heroes
         self.heroes = []
         let nameSearch = searchBar.searchTextField.text
-        MarvelAPi.loadHeroes(name: nameSearch, page: self.currentPage) { (info) in
+        MarvelViewModel.loadHeroes(name: nameSearch, page: self.currentPage) { (info) in
             if let info = info {
                 self.heroes += info.data.results
                 self.total = info.data.total
