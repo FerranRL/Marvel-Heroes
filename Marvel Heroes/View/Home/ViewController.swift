@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         searchBar.searchTextField.leftView?.tintColor = .white
         searchBar.searchTextField.textColor = .white
         searchBar.tintColor = .white
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString.init(string: "Bucar personaje...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString.init(string: "Buscar personaje...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
@@ -231,14 +231,4 @@ class ViewController: UIViewController {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
 
