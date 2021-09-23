@@ -10,7 +10,7 @@ Open the Marvel Heroes.xcworkspace file in Xcode for everything to work properly
 
 It is necessary to add the public and private keys of the Marvel API, since for security reasons these are not included in the project.
 
-To add the keys, go to the “Constants.swift”, which is located in the Managers folder, and add the keys in "privateKey" and "publicKey" changing the text "Put the key here." by the corresponding key. Keys can be obtained by registering on the page “https://developer.marvel.com/".
+To add the keys, you must go to current Scheme and fill the Environment Variables "MARVEL_PRIVATE_KEY" and "MARVEL_PUBLIC_KEY" by the corresponding keys. Keys can be obtained by registering on the page “https://developer.marvel.com/".
 
 # Project Info 🛠️
 - Xcode 12.5 
