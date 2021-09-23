@@ -64,7 +64,7 @@ class ViewController: UIViewController {
     
     var searchHeroes: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.searchTextField.backgroundColor = .lightGray.withAlphaComponent(0.6)
+        searchBar.searchTextField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.6)
         searchBar.searchTextField.leftView?.tintColor = .white
         searchBar.searchTextField.textColor = .white
         searchBar.tintColor = .white
