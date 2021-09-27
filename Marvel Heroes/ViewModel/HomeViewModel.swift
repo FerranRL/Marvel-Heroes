@@ -8,7 +8,7 @@
 import Foundation
 
 
-class MarvelViewModel {
+class HomeViewModel {
     
     
     var marvelInfo: MarvelInfo!

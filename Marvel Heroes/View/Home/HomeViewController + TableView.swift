@@ -7,7 +7,7 @@
 
 import UIKit
 
-let viewModel = MarvelViewModel()
+let viewModel = HomeViewModel()
 
 ///Extension for the TableView
 

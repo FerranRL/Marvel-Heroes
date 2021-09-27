@@ -14,10 +14,10 @@ import SwiftHash
 
 class MarvelApiTest: XCTestCase {
     
-    var sut: MarvelViewModel?
+    var sut: HomeViewModel?
     
     override func setUp() {
-        sut = MarvelViewModel()
+        sut = HomeViewModel()
     }
     
      override func tearDown() {

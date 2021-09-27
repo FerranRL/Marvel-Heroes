@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     var total = 0
     let animationView = AnimationView(name: "loader")
     var firstLoad = true
-    let viewModel = MarvelViewModel()
+    let viewModel = HomeViewModel()
     
     
     

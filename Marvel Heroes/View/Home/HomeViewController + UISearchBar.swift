@@ -7,7 +7,7 @@
 
 import UIKit
 
-var modelView = MarvelViewModel()
+var modelView = HomeViewModel()
 
 
 extension ViewController: UISearchBarDelegate {
