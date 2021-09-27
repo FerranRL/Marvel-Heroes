@@ -13,7 +13,6 @@ class MarvelViewModel {
     
     var marvelInfo: MarvelInfo!
     var marvelError: MarvelError!
-    var heroInfo: MarvelInfo!
     var searchInfo: MarvelInfo!
     
     /// Request for all heros to API
@@ -51,20 +50,7 @@ class MarvelViewModel {
         }
     }
     
-    /// Request for a Hero by Id to API
-    /// Parameters:
-    /// - id: Id for the selected hero
-    
-    func loadHero(id: Int, completion: @escaping (Bool) -> Void) {
-        MarvelAPI.loadHero(id: id) { info in
-            if info != nil {
-                self.heroInfo = info
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
+
     
 }
 

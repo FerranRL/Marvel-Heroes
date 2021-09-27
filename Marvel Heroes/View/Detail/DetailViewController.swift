@@ -22,7 +22,10 @@ class DetailViewController: UIViewController {
     }()
     let body = UIView()
     
+    var heroId: Int = 0
     var hero: Hero!
+    
+    var detailViewModel = DetailViewModel()
     
     let headerImageView: UIImageView = {
         let imageView = UIImageView()
@@ -103,16 +106,28 @@ class DetailViewController: UIViewController {
     ///Function for pass Hero data to view.
     
     private func setupData() {
-        if let url = URL(string: (hero.thumbnail.url)) {
-            self.heroImageView.kf.setImage(with: url)
-        } else {
-            heroImageView.image = nil
+        
+        ///Load Hero By ID
+        /// - Parameters:
+        /// - id: Id of the hero to find.
+        
+        detailViewModel.loadHero(id: heroId) { result in
+            
+            if result {
+                let heros = self.detailViewModel.heroInfo.data.results
+                self.hero = heros[0]
+                if let url = URL(string: (self.hero.thumbnail.url)) {
+                    self.heroImageView.kf.setImage(with: url)
+                } else {
+                    self.heroImageView.image = nil
+                }
+                
+                self.heroLabel.text = self.hero.name
+                
+                self.descriptionLabel.text = (self.hero?.description != "") ? self.hero.description : Constants.heroDescription
+            }
         }
         
-        heroLabel.text = hero.name
-    
-        descriptionLabel.text = (hero.description != "") ? hero.description : Constants.heroDescription
-    
     }
     
     private func setupScrollView() {

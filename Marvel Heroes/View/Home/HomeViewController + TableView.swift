@@ -32,28 +32,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var hero:[Hero] = []
         let heroId = heroes[indexPath.row].id
         
         
-        ///Load Hero By ID
-        /// - Parameters:
-        /// - id: Id of the hero to find.
-        
-        viewModel.loadHero(id: heroId) { result in
-            
-            if result {
-                hero = self.viewModel.heroInfo.data.results
-                let storyboard: UIStoryboard = UIStoryboard(name: "DetailStoryBoard", bundle: nil)
-                let detailController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController
-                detailController.hero = hero[0]
-                self.present(detailController, animated: true, completion: nil)
-            }
-            
-            
-        }
+        let storyboard: UIStoryboard = UIStoryboard(name: "DetailStoryBoard", bundle: nil)
+        let detailController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController
+        detailController.heroId = heroId
+        self.present(detailController, animated: true, completion: nil)
 
- 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
