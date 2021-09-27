@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     var total = 0
     let animationView = AnimationView(name: "loader")
     var firstLoad = true
+    let viewModel = MarvelViewModel()
     
     
     
@@ -82,6 +83,7 @@ class ViewController: UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
+        ///Creating View
         setupContentView()
         setupHeader()
         clearBackgroundColorSB()
@@ -174,7 +176,7 @@ class ViewController: UIViewController {
         
     }
     
-    //Load Data
+    //Load Data for TableView
     
     func loadHeroes() {
         loadingHeroes = true
@@ -194,11 +196,16 @@ class ViewController: UIViewController {
             
         }
         
+        ///Load list of Heroes
+        /// - Parameters:
+        /// - name: Optional value for search by name
+        /// - page: Value for pagination
+        /// - result: Bool to know if success or not.
         
-        MarvelViewModel.loadHeroes(name: self.name, page: self.currentPage) { (info) in
-            if let info = info {
-                self.heroes += info.data.results
-                self.total = info.data.total
+        viewModel.loadAllHeroes(name: self.name, page: self.currentPage) { (result) in
+            if result {
+                self.heroes += self.viewModel.marvelInfo.data.results
+                self.total = self.viewModel.marvelInfo.data.count
                 DispatchQueue.main.async {
                     
                     self.loadingHeroes = false
@@ -212,12 +219,24 @@ class ViewController: UIViewController {
                     }, completion: nil)
                     
                 }
+            } else {
+                
+                let error = self.viewModel.marvelError
+                
+                UIView.transition(with: self.view, duration: 0.25, options: .transitionCrossDissolve, animations: {
+                    self.animationView.removeFromSuperview()
+                }, completion: nil)
+                
+                let alert = UIAlertController.init(title: error?.code, message: error?.message, preferredStyle: .alert)
+                
+                self.present(alert, animated: true, completion: nil)
+                
             }
         }
         
     }
     
-    ///Load Animation
+    ///Load Animation for loader
     
     func lottieAnimation() {
         

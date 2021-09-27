@@ -7,6 +7,10 @@
 
 import UIKit
 
+let viewModel = MarvelViewModel()
+
+///Extension for the TableView
+
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.heroes.count
@@ -31,13 +35,24 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         var hero:[Hero] = []
         let heroId = heroes[indexPath.row].id
         
-        MarvelViewModel.loadHero(id: heroId) { info in
-            hero = info!.data.results
-            let storyboard: UIStoryboard = UIStoryboard(name: "DetailStoryBoard", bundle: nil)
-            let detailController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController
-            detailController.hero = hero[0]
-            self.present(detailController, animated: true, completion: nil)
+        
+        ///Load Hero By ID
+        /// - Parameters:
+        /// - id: Id of the hero to find.
+        
+        viewModel.loadHero(id: heroId) { result in
+            
+            if result {
+                hero = self.viewModel.heroInfo.data.results
+                let storyboard: UIStoryboard = UIStoryboard(name: "DetailStoryBoard", bundle: nil)
+                let detailController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController
+                detailController.hero = hero[0]
+                self.present(detailController, animated: true, completion: nil)
+            }
+            
+            
         }
+
  
     }
     

@@ -8,6 +8,11 @@
 import UIKit
 
 extension UIView {
+    
+    ///Function for create a gradient
+    /// - Parameters:
+    /// - frame: CGRect for the size of the gradient
+    
     func applyGradient(frame: CGRect) {
         let gradient = CAGradientLayer()
         gradient.frame = frame

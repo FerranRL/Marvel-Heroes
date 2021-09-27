@@ -1,58 +1,71 @@
 //
-//  MarvelAPI.swift
+//  MarvelViewModel.swift
 //  Marvel Heroes
 //
-//  Created by f.rosales.lopera on 22/7/21.
+//  Created by f.rosales.lopera on 27/9/21.
 //
 
 import Foundation
-import SwiftHash
-import Alamofire
+
 
 class MarvelViewModel {
     
-    ///Load all Heroes
-    class func loadHeroes(name: String?, page: Int = 0, onComplete: @escaping (MarvelInfo?) -> Void) {
-        let offset = page * Constants.limit
-        let startsWith: String
-        if let name = name, !name.isEmpty {
-            startsWith = "nameStartsWith=\(name.replacingOccurrences(of: " ", with: ""))"
-        } else {
-            startsWith = ""
-        }
-        
-        let url = Constants.basePath + "?offset=\(offset)&limit=\(Constants.limit)&" + startsWith + getCredentials()
-        AF.request(url).responseJSON { (response) in
-            guard let data = response.data,
-                  let marvelInfo = try? JSONDecoder().decode(MarvelInfo.self, from: data),
-                  marvelInfo.code == 200 else {
-                onComplete(nil)
-                return
+    
+    var marvelInfo: MarvelInfo!
+    var marvelError: MarvelError!
+    var heroInfo: MarvelInfo!
+    var searchInfo: MarvelInfo!
+    
+    /// Request for all heros to API
+    /// Parameters:
+    /// - name: Optional value for searching
+    /// - page: Pagination
+    
+    func loadAllHeroes(name: String?, page: Int = 0, completion: @escaping (Bool) -> Void ) {
+        MarvelAPI.loadHeroes(name: name, page: page) { info, error in
+            if info != nil {
+                self.marvelInfo = info
+                completion(true)
+                
+            } else if error != nil {
+                self.marvelError = error
+                completion(false)
             }
-            onComplete(marvelInfo)
         }
     }
     
-    ///Load character by Id
-    class func loadHero(id: Int, onComplete: @escaping (MarvelInfo?) -> Void ) {
-        
-        
-        let url = Constants.basePath + "/\(id)?" + getCredentials()
-        AF.request(url).responseJSON { (response) in
-            guard let data = response.data,
-                  let marvelInfo = try? JSONDecoder().decode(MarvelInfo.self, from: data),
-                  marvelInfo.code == 200 else {
-                onComplete(nil)
-                return
+    /// Request for search Hero by name
+    /// Parameters:
+    /// - name: Optional value for searching
+    /// - page: Pagination
+    
+    func searchHeroes(name: String?, page: Int = 0, completion: @escaping (Bool) -> Void ) {
+        MarvelAPI.searchHeroes(name: name, page: page) { (search, error) in
+            if search != nil {
+                self.searchInfo = search
+                completion(true)
+            } else if error != nil {
+                self.marvelError = error
+                completion(false)
             }
-            onComplete(marvelInfo)
         }
     }
     
-    private class func getCredentials() -> String {
-        let ts = String(Date().timeIntervalSince1970)
-        let hash = MD5(ts+Constants.privateKey!+Constants.publicKey!).lowercased()
-        return "&ts=\(ts)&apikey=\(String(describing: Constants.publicKey))&hash=\(hash)"
+    /// Request for a Hero by Id to API
+    /// Parameters:
+    /// - id: Id for the selected hero
+    
+    func loadHero(id: Int, completion: @escaping (Bool) -> Void) {
+        MarvelAPI.loadHero(id: id) { info in
+            if info != nil {
+                self.heroInfo = info
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
     
 }
+
+

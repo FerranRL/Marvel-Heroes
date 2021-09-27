@@ -11,7 +11,7 @@ class LoaderView: UIView {
     
     var label: UILabel = {
         let label = UILabel()
-        label.text = "Cargando más personajes..."
+        label.text = Constants.loaderText
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 25, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false

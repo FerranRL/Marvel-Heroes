@@ -56,14 +56,14 @@ class MarvelApiTest: XCTestCase {
     func testLoadHeroByIDCheckMatch() {
         
         
-        let expectation = XCTestExpectation(description: "Comprobar que la información recibida corresponde a la solicitada.")
+        let expectation = XCTestExpectation(description: Constants.testDescriptionLoadByID)
         let idHero = 1011334
         
         
         MarvelViewModel.loadHero(id: idHero, onComplete: { info in
             
-            let hero = info!.data.results[0]
-            XCTAssertEqual(idHero, hero.id, "Los ids no coinciden")
+            let hero = info.data.results[0]
+            XCTAssertEqual(idHero, hero.id, testNotMatch)
             expectation.fulfill()
 
         })

@@ -100,16 +100,18 @@ class DetailViewController: UIViewController {
         setupBody()
     }
     
+    ///Function for pass Hero data to view.
+    
     private func setupData() {
-        if let url = URL(string: (hero?.thumbnail.url)!) {
-            heroImageView.kf.setImage(with: url)
+        if let url = URL(string: (hero.thumbnail.url)) {
+            self.heroImageView.kf.setImage(with: url)
         } else {
             heroImageView.image = nil
         }
         
         heroLabel.text = hero.name
     
-        descriptionLabel.text = (hero.description != "") ? hero.description : "No hay descripción de este personaje de Marvel"
+        descriptionLabel.text = (hero.description != "") ? hero.description : Constants.heroDescription
     
     }
     

@@ -8,11 +8,13 @@
 import UIKit
 import Kingfisher
 
+///Definition of the cell for the TableView
+
 class CharacterTableViewCell: UITableViewCell {
     
     let characterImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "spiderman_profile")
+        imageView.image = UIImage(named: "")
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -28,7 +30,7 @@ class CharacterTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .light)
         label.textColor = .white
-        label.text = "Spider-Man"
+        label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

@@ -13,6 +13,11 @@ struct MarvelInfo: Codable {
     let status: String
     let data: MarvelData
 }
+struct MarvelError: Codable {
+    let code: String
+    let message: String
+    
+}
 
 struct MarvelData: Codable {
     let offset: Int

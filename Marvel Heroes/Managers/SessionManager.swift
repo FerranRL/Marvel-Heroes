@@ -12,4 +12,5 @@ class SessionManager: NSObject {
     static let shared = SessionManager()
     
     var characters: [Character]?
+    
 }

@@ -7,8 +7,12 @@
 
 import UIKit
 
+var modelView = MarvelViewModel()
+
+
 extension ViewController: UISearchBarDelegate {
     
+    ///Function when searchButton is tapped
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -16,16 +20,19 @@ extension ViewController: UISearchBarDelegate {
         self.allHeroes = self.heroes
         self.heroes = []
         let nameSearch = searchBar.searchTextField.text
-        MarvelViewModel.loadHeroes(name: nameSearch, page: self.currentPage) { (info) in
-            if let info = info {
-                self.heroes += info.data.results
-                self.total = info.data.total
+        
+        ///Function for execute the search of the word typed in searchBar
+        /// - Parameters:
+        /// - name: The text value of the searchBar
+        /// - page: Value for pagination
+        
+        viewModel.searchHeroes(name: nameSearch, page: self.currentPage) { (result) in
+            if result {
+                self.heroes = self.viewModel.searchInfo.data.results
+                self.total = self.viewModel.searchInfo.data.total
                 DispatchQueue.main.async {
-                    
                     self.loadingHeroes = false
                     self.tableView.reloadData()
-                    
-                    
                 }
             }
         }
